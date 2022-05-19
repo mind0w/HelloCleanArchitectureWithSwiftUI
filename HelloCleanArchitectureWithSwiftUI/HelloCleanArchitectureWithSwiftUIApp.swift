@@ -10,9 +10,11 @@ import PresentationLayer
 
 @main
 struct HelloCleanArchitectureWithSwiftUIApp: App {
+    let appState = AppState()
     var body: some Scene {
         WindowGroup {
             TokenView(viewModel: AppDI.shared.tokenViewModel)
+                .environmentObject(appState)
         }
     }
 }
