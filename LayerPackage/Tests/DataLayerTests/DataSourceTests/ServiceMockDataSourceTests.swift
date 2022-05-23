@@ -32,7 +32,7 @@ class ServiceMockDataSourceTests: XCTestCase {
             XCTAssertNotNil(service)
             XCTAssertNotNil(service!.id)
             XCTAssertEqual(service!.serviceName, req.serviceName)
-            XCTAssertEqual(service!.additinalInfo, req.additionalInfo)
+            XCTAssertEqual(service!.additionalInfo, req.additionalInfo)
         }
     }
     
@@ -44,9 +44,17 @@ class ServiceMockDataSourceTests: XCTestCase {
             for service in services! {
                 XCTAssertNotNil(service.id)
                 XCTAssertNotNil(service.serviceName)
-                XCTAssertNotNil(service.additinalInfo)
+                XCTAssertNotNil(service.additionalInfo)
                 XCTAssertNotNil(service.otpCode)
             }
+        }
+    }
+    
+    func testModify() {
+        Task {
+            let success = await dataSource?.modifyService(.init())
+            XCTAssertNotNil(success)
+            XCTAssertTrue(success!)
         }
     }
     

@@ -9,11 +9,14 @@ import Foundation
 import Combine
 
 public class AppState: ObservableObject {
+    let di: AppDIInterface
     @Published var settings: Settings
     
     var settingCancellable: AnyCancellable?
 
-    public init(settings: Settings = Settings()) {
+    public init(di: AppDIInterface = MockDI(),
+                settings: Settings = Settings()) {
+        self.di = di
         self.settings = settings
 
         settingCancellable = settings.objectWillChange

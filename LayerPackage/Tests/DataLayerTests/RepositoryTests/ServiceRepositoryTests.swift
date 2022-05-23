@@ -42,7 +42,7 @@ class ServiceRepositoryTests: XCTestCase {
                 XCTAssertNotNil(service)
                 XCTAssertNotNil(service.id)
                 XCTAssertEqual(service.serviceName, req.serviceName)
-                XCTAssertEqual(service.additinalInfo, req.additionalInfo)
+                XCTAssertEqual(service.additionalInfo, req.additionalInfo)
             })
             .store(in: &bag)
     }
@@ -62,9 +62,25 @@ class ServiceRepositoryTests: XCTestCase {
                 for service in services {
                     XCTAssertNotNil(service.id)
                     XCTAssertNotNil(service.serviceName)
-                    XCTAssertNotNil(service.additinalInfo)
+                    XCTAssertNotNil(service.additionalInfo)
                     XCTAssertNotNil(service.otpCode)
                 }
+            })
+            .store(in: &bag)
+    }
+    
+    func testModify() {
+        repository?.modifyService(.init())
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let err):
+                    XCTFail(err.localizedDescription)
+                    break
+                }
+            }, receiveValue: { success in
+                XCTAssertTrue(success)
             })
             .store(in: &bag)
     }
@@ -72,5 +88,6 @@ class ServiceRepositoryTests: XCTestCase {
     static var allTests = [
         ("testInsert", testInsert),
         ("testFetchList", testFetchList),
+        ("testModify", testModify),
     ]
 }

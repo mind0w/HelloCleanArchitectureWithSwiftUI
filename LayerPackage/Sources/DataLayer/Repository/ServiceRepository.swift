@@ -31,4 +31,12 @@ public struct ServiceRepository: ServiceRepositoryInterface {
             .receive(on: RunLoop.main)
             .eraseToAnyPublisher()
     }
+    
+    public func modifyService(_ service: ServiceModel) -> AnyPublisher<Bool, Never> {
+        return Just(service)
+            .asyncMap { await dataSource.modifyService($0) }
+            .receive(on: RunLoop.main)
+            .eraseToAnyPublisher()
+    }
+    
 }

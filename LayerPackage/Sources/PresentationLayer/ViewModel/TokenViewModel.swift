@@ -12,6 +12,7 @@ import DomainLayer
 public protocol TokenViewModelInput {
     func executeFetchList()
     func executeInsertService(serviceName: String?, secretKey: String?, additionalInfo: String?)
+    func executeEditService(id: Int64, serviceName: String?, additionalInfo: String?, completion: (() -> Void)?)
 }
 
 public protocol TokenViewModelOutput {
@@ -23,13 +24,16 @@ public final class TokenViewModel: ObservableObject, TokenViewModelInput, TokenV
     
     private let fetchListUseCase: FetchServiceListUseCase?
     private let insertServiceUseCase: InsertServiceUseCase?
+    private let modifyServiceUseCase: ModifyServiceUseCase?
     
     private var bag = Set<AnyCancellable>()
     
     public init(fetchListUseCase: FetchServiceListUseCase? = nil,
-                insertServiceUseCase: InsertServiceUseCase? = nil) {
+                insertServiceUseCase: InsertServiceUseCase? = nil,
+                modifyServiceUseCase: ModifyServiceUseCase? = nil) {
         self.fetchListUseCase = fetchListUseCase
         self.insertServiceUseCase = insertServiceUseCase
+        self.modifyServiceUseCase = modifyServiceUseCase
     }
     
     public func executeFetchList() {
@@ -52,6 +56,24 @@ public final class TokenViewModel: ObservableObject, TokenViewModelInput, TokenV
                 }
             }, receiveValue: { service in
                 self.services.append(service)
+            })
+            .store(in: &bag)
+    }
+    
+    public func executeEditService(id: Int64,
+                                   serviceName: String? = nil,
+                                   additionalInfo: String? = nil,
+                                   completion: (() -> Void)? = nil) {
+        var req = ServiceModel(id: id)
+        req.serviceName = serviceName
+        req.additionalInfo = additionalInfo
+        self.modifyServiceUseCase?.execute(value: req)
+            .sink(receiveValue: { success in
+                if success, let idx = self.services.firstIndex(where: { $0.id == id }) {
+                    self.services[idx].serviceName = serviceName
+                    self.services[idx].additionalInfo = additionalInfo
+                }
+                completion?()
             })
             .store(in: &bag)
     }

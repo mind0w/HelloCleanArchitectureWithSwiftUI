@@ -2,7 +2,7 @@
 //  WeatherEntityTests.swift
 //  
 //
-//  Created by tigi on 2021/02/12.
+//  Created by mindw on 2021/02/12.
 //
 
 import XCTest
@@ -22,7 +22,7 @@ final class ServiceModelTests: XCTestCase {
         let serviceModel = ServiceModel(id: 123,
                                         otpCode: "123 123",
                                         serviceName: "Google",
-                                        additinalInfo: "test@google.com")
+                                        additionalInfo: "test@google.com")
         
         XCTAssertNotNil(serviceModel)
         XCTAssertEqual(serviceModel.id, 123)

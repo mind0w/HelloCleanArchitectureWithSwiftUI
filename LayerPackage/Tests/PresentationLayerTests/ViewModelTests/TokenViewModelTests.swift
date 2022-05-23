@@ -40,7 +40,7 @@ class TokenViewModelTests: XCTestCase {
                 XCTAssertNotNil(service)
                 XCTAssertNotNil(service.id)
                 XCTAssertEqual(service.serviceName, serviceName)
-                XCTAssertEqual(service.additinalInfo, addtionalInfo)
+                XCTAssertEqual(service.additionalInfo, addtionalInfo)
                 expectation.fulfill()
             })
             .store(in: &bag)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C2B50B66283B4ED300E90030 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = C2B50B65283B4ED300E90030 /* README.md */; };
 		D9BA919527C470E40041FBCB /* HelloCleanArchitectureWithSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BA919427C470E40041FBCB /* HelloCleanArchitectureWithSwiftUIApp.swift */; };
 		D9BA919927C470E50041FBCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9BA919827C470E50041FBCB /* Assets.xcassets */; };
 		D9BA919C27C470E50041FBCB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9BA919B27C470E50041FBCB /* Preview Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C2B50B65283B4ED300E90030 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		D9BA919127C470E40041FBCB /* HelloCleanArchitectureWithSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloCleanArchitectureWithSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9BA919427C470E40041FBCB /* HelloCleanArchitectureWithSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloCleanArchitectureWithSwiftUIApp.swift; sourceTree = "<group>"; };
 		D9BA919827C470E50041FBCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 		D9BA919327C470E40041FBCB /* HelloCleanArchitectureWithSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				C2B50B65283B4ED300E90030 /* README.md */,
 				D9BA91C027C471B10041FBCB /* DependecyInjection */,
 				D9BA919427C470E40041FBCB /* HelloCleanArchitectureWithSwiftUIApp.swift */,
 				D9BA919827C470E50041FBCB /* Assets.xcassets */,
@@ -259,6 +262,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2B50B66283B4ED300E90030 /* README.md in Resources */,
 				D9BA919C27C470E50041FBCB /* Preview Assets.xcassets in Resources */,
 				D9BA919927C470E50041FBCB /* Assets.xcassets in Resources */,
 			);

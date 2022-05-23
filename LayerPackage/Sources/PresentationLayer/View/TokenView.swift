@@ -21,12 +21,16 @@ public struct TokenView: View {
         NavigationView {
             List {
                 ForEach(self.viewModel.services) { service in
-                    VStack(alignment: .leading) {
-                        Text(service.serviceName ?? "")
-                        Text(service.otpCode ?? "")
-                            .font(.title)
-                            .bold()
-                        Text(service.additinalInfo ?? "")
+                    NavigationLink {
+                        TokenDetailView(viewModel: viewModel, service: service)
+                    } label: {
+                        VStack(alignment: .leading) {
+                            Text(service.serviceName ?? "")
+                            Text(service.otpCode ?? "")
+                                .font(.title)
+                                .bold()
+                            Text(service.additionalInfo ?? "")
+                        }
                     }
                     .padding()
                 }
@@ -55,6 +59,7 @@ public struct TokenView: View {
             }
         }
         .onAppear {
+            print("Token onAppear")
             self.viewModel.executeFetchList()
         }
         .environment(\.colorScheme, theme)
@@ -76,8 +81,8 @@ public struct TokenView: View {
 struct TokenView_Previews: PreviewProvider {
     static var previews: some View {
         let vm = TokenViewModel()
-        vm.services.append(ServiceModel(id: 0, otpCode: "000 000", serviceName: "Name0", additinalInfo: "Info0"))
-        vm.services.append(ServiceModel(id: 1, otpCode: "111 111", serviceName: "Name1", additinalInfo: "Info1"))
+        vm.services.append(ServiceModel(id: 0, otpCode: "000 000", serviceName: "Name0", additionalInfo: "Info0"))
+        vm.services.append(ServiceModel(id: 1, otpCode: "111 111", serviceName: "Name1", additionalInfo: "Info1"))
         return TokenView(viewModel: vm)
             .environmentObject(AppState())
     }

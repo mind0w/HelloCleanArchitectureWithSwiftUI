@@ -14,7 +14,7 @@ struct FakeServiceRepository: ServiceRepositoryInterface {
         return Just(ServiceModel(id: 0,
                                  otpCode: value.secretKey,
                                  serviceName: value.serviceName,
-                                 additinalInfo: value.additionalInfo))
+                                 additionalInfo: value.additionalInfo))
             .setFailureType(to: Error.self)
             .eraseToAnyPublisher()
     }
@@ -31,5 +31,9 @@ struct FakeServiceRepository: ServiceRepositoryInterface {
 
         return Just(mockedList)
             .eraseToAnyPublisher()
+    }
+    
+    func modifyService(_ service: ServiceModel) -> AnyPublisher<Bool, Never> {
+        return Just(true).eraseToAnyPublisher()
     }
 }

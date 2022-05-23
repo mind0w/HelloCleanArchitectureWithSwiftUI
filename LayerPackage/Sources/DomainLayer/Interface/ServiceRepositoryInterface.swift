@@ -11,4 +11,5 @@ import Combine
 public protocol ServiceRepositoryInterface {
     func insertService(value: InsertServiceRequestValue) -> AnyPublisher<ServiceModel, Error>
     func fetchServiceList() -> AnyPublisher<[ServiceModel], Never>
+    func modifyService(_ service: ServiceModel) -> AnyPublisher<Bool, Never>
 }

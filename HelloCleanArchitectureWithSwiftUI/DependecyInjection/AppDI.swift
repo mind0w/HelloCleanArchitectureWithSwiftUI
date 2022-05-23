@@ -27,9 +27,7 @@ public class AppDI: AppDIInterface {
         self.appEnvironment = appEnvironment
     }
 
-    public lazy var tokenViewModel: TokenViewModel = {
-
-        //MARK: Data Layer
+    private lazy var serviceRepository: ServiceRepositoryInterface = {
         let dataSource: ServiceDataSourceInterface
 
         switch appEnvironment.phase {
@@ -39,16 +37,12 @@ public class AppDI: AppDIInterface {
             dataSource = ServiceMockDataSource()
         }
 
-        let repository = ServiceRepository(dataSource: dataSource)
-
-        //MARK: Domain Layer
-        let fetchListUseCase = FetchServiceListUseCase(repository: repository)
-        let insertServiceUseCase = InsertServiceUseCase(repository: repository)
-
-        //MARK: Presentation
-        let viewModel = TokenViewModel(fetchListUseCase: fetchListUseCase,
-                                       insertServiceUseCase: insertServiceUseCase)
-
-        return viewModel
+        return ServiceRepository(dataSource: dataSource)
+    }()
+    
+    public lazy var tokenViewModel: TokenViewModel = {
+        return .init(fetchListUseCase: .init(repository: serviceRepository),
+                     insertServiceUseCase: .init(repository: serviceRepository),
+                     modifyServiceUseCase: .init(repository: serviceRepository))
     }()
 }

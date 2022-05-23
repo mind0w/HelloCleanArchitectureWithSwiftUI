@@ -40,7 +40,7 @@ class InsertServiceTests: XCTestCase {
                 XCTAssertNotNil(service)
                 XCTAssertNotNil(service.id)
                 XCTAssertEqual(service.serviceName, req.serviceName)
-                XCTAssertEqual(service.additinalInfo, req.additionalInfo)
+                XCTAssertEqual(service.additionalInfo, req.additionalInfo)
             }
             .store(in: &bag)
 

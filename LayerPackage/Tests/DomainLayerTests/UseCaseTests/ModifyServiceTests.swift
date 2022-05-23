@@ -1,24 +1,24 @@
 //
-//  FetchServiceTests.swift
-//  
+//  ModifyServiceTests.swift
 //
-//  Created by mindw on 2022/01/10.
+//
+//  Created by mindw on 2022/05/20.
 //
 
 import XCTest
 import Combine
 @testable import DomainLayer
 
-final class FetchServiceTests: XCTestCase {
+final class ModifyServiceTests: XCTestCase {
     
-    var useCase: FetchServiceListUseCase?
+    var useCase: ModifyServiceUseCase?
     private var bag: Set<AnyCancellable> = Set<AnyCancellable>()
     
     //MARK: - Setup
     
     override func setUpWithError() throws {
         
-        self.useCase = FetchServiceListUseCase(repository: FakeServiceRepository())
+        self.useCase = ModifyServiceUseCase(repository: FakeServiceRepository())
         
         guard self.useCase != nil else {
             XCTFail("Usecase is nil")
@@ -29,7 +29,7 @@ final class FetchServiceTests: XCTestCase {
     //MARK: - Tests
     func testExecute() {
         
-        useCase?.execute(value: ())
+        useCase?.execute(value: .init())
             .sink { receiveCompletion in
                 switch receiveCompletion {
                 case .failure(let error):
@@ -37,11 +37,8 @@ final class FetchServiceTests: XCTestCase {
                 case .finished:
                     break
                 }
-            } receiveValue: { services in
-                XCTAssertGreaterThan(services.count, 0)
-                for service in services {
-                    XCTAssertNotNil(service.id)
-                }
+            } receiveValue: { success in
+                XCTAssertTrue(success)
             }
             .store(in: &bag)
     }
